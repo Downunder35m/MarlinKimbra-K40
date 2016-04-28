@@ -3113,11 +3113,16 @@ inline void gcode_G5() {
 
 #if ENABLED(LASER) && ENABLED(LASER_RASTER)
 inline void gcode_G7() {
-  if (code_seen('L')) laser.raster_raw_length = int(code_value());
-  if (code_seen('$')) {
-    laser.raster_direction = (bool)code_value();
-    destination[Y_AXIS] = current_position[Y_AXIS] + (laser.raster_mm_per_pulse * laser.raster_aspect_ratio); // increment Y axis
-  }
+  if (code_seen('$')) { // Have to do the Y-movement in its own block
+laser.raster_direction = (bool)code_value();
+destination[Y_AXIS] = current_position[Y_AXIS] + (laser.raster_mm_per_pulse * laser.raster_aspect_ratio);
+// increment Y axis
+laser.mode = CONTINUOUS; //
+laser.status = LASER_OFF; // Just move
+prepare_move(); // Create a block just to move in Y.
+}
+if (code_seen('L')) 
+laser.raster_raw_length = int(code_value());
   if (code_seen('D')) laser.raster_num_pixels = base64_decode(laser.raster_data, seen_pointer+1, laser.raster_raw_length);
   if (!laser.raster_direction) {
     destination[X_AXIS] = current_position[X_AXIS] - (laser.raster_mm_per_pulse * laser.raster_num_pixels);

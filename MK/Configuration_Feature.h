@@ -1029,8 +1029,8 @@
  * Uncomment EEPROM CHITCHAT to enable EEPROM Serial responses.                                                         *
  *                                                                                                                      *
  ************************************************************************************************************************/
-//#define EEPROM_SETTINGS
-//#define EEPROM_CHITCHAT // Uncomment this to enable EEPROM Serial responses.
+#define EEPROM_SETTINGS
+#define EEPROM_CHITCHAT // Uncomment this to enable EEPROM Serial responses.
 //#define DISABLE_M503
 /************************************************************************************************************************/
 
@@ -1149,7 +1149,7 @@
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 // REMEMBER TO INSTALL U8glib to your ARDUINO library folder: https://github.com/olikraus/U8glib_Arduino
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 // The RepRapWorld REPRAPWORLD_KEYPAD v1.1
 // http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626
@@ -1315,7 +1315,7 @@
  * or more micro steps (AXIS_STEPS_PER_UNIT * MAX_FEEDRATE > 150,000)  *
  *                                                                     *
  ***********************************************************************/
-//#define ENABLE_HIGH_SPEED_STEPPING
+#define ENABLE_HIGH_SPEED_STEPPING
 /***********************************************************************/
 
 

@@ -358,7 +358,7 @@
  ******************************* Axis steps per unit *************************************
  *****************************************************************************************/
 // Default steps per unit               X,  Y,    Z,  E0...(per extruder)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {157.4802, 157.4802, 3200, 625, 625, 625, 625}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {157.4802/2, 157.4802/2, 3200, 625, 625, 625, 625}
 /*****************************************************************************************/
 
 
@@ -367,7 +367,7 @@
  *****************************************************************************************/
 //                                       X,   Y, Z,  E0...(per extruder). (mm/sec)
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 2, 100, 100, 100, 100}
-#define MANUAL_FEEDRATE               {50*60, 50*60, 4*60, 60}  // Feedrates for manual moves along X, Y, Z, E from panel
+#define MANUAL_FEEDRATE               {60*60, 60*60, 4*60, 60}  // Feedrates for manual moves along X, Y, Z, E from panel
 #define DEFAULT_MINIMUMFEEDRATE       0.0                       // minimum feedrate
 #define DEFAULT_MINTRAVELFEEDRATE     0.0
 // Minimum planner junction speed. Sets the default minimum speed the planner plans for at the end
@@ -381,13 +381,13 @@
  ******************************** Axis accelleration *************************************
  *****************************************************************************************/
 //  Maximum start speed for accelerated moves.    X,    Y,  Z,   E0...(per extruder)
-#define DEFAULT_MAX_ACCELERATION              {1000, 800, 50, 1000, 1000, 1000, 1000}
+#define DEFAULT_MAX_ACCELERATION              {6000, 6000, 50, 6000, 1000, 1000, 1000}
 //  Maximum acceleration in mm/s^2 for retracts   E0... (per extruder)
-#define DEFAULT_RETRACT_ACCELERATION          {10000, 10000, 10000, 10000}
+#define DEFAULT_RETRACT_ACCELERATION          {30000, 10000, 10000, 10000}
 //  X, Y, Z and E* maximum acceleration in mm/s^2 for printing moves
-#define DEFAULT_ACCELERATION          1000
+#define DEFAULT_ACCELERATION          3000
 //  X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
-#define DEFAULT_TRAVEL_ACCELERATION   1000
+#define DEFAULT_TRAVEL_ACCELERATION   3000
 /*****************************************************************************************/
 
 
@@ -399,23 +399,23 @@
  * (i.e. the software might assume it can be done instantaneously)                       *
  *                                                                                       *
  *****************************************************************************************/
-#define DEFAULT_XYJERK 27.0                 // (mm/sec)
+#define DEFAULT_XYJERK 30.0                 // (mm/sec)
 #define DEFAULT_ZJERK   0.4                 // (mm/sec)
 //  max initial speed for retract moves   E0... (mm/sec) per extruder
-#define DEFAULT_EJERK                   {50, 5.0, 5.0, 5.0}
+#define DEFAULT_EJERK                   {3000, 5.0, 5.0, 5.0}
 /*****************************************************************************************/
 
 
 /*****************************************************************************************
  ************************************ Homing feedrate ************************************
  *****************************************************************************************/
-#define HOMING_FEEDRATE {2400, 2400, 2*60, 0} // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {4000, 4000, 2*60, 0} // set the homing speeds (mm/min)
 
 // homing hits the endstop, then retracts by this distance, before it tries to slowly bump again:
-#define X_HOME_BUMP_MM 5
-#define Y_HOME_BUMP_MM 5
+#define X_HOME_BUMP_MM 15
+#define Y_HOME_BUMP_MM 15
 #define Z_HOME_BUMP_MM 2
-#define HOMING_BUMP_DIVISOR {5, 5, 2}  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_DIVISOR {2, 2, 2}  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 /*****************************************************************************************/
 
 

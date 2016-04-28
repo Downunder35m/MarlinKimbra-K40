@@ -875,22 +875,22 @@ float junction_deviation = 0.1;
          //100% power on a pixel basis is 255, convert back to 255 = 100.
 
         //http://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
-			int OldRange, NewRange, NewMin;
-			//float NewValue;
-			NewMin = 580; // Min laser power for raster engraving, still needs to be included into the M649 command
-			//OldRange = (255 - 0);
-			//NewRange = (laser.rasterlaserpower - NewMin); //7% power on my unit outputs hardly any noticable burn at F3000 on paper, so adjust the raster contrast based off 7 being the lower. 7 still produces burns at slower feed rates, but getting less power than this isn't typically needed at slow feed rates.
-			//NewValue = (float)(((((float)laser.raster_data[i] - 0) * NewRange) / OldRange) + 70);
-			//NewValue = ((((laser.raster_data[i] - 0) * NewRange) / OldRange) + NewMin);
-			//If less than 7%, turn off the laser tube.
-			//if(NewValue == 280) 
-			//	NewValue = 0;
-			int NewValue = laser.raster_data[i];
-			NewValue = map(NewValue, 0 ,256, NewMin, laser.rasterlaserpower); // Chnged by Downunder35m as the original mapping resulted in a loss of CPU power due to the float calculations and the input range was set to 260 instead of 255 as otherwise total black areas would not come out properly.
-			
-			
-			
-			block->laser_raster_data[i] = NewValue; 
+            int OldRange, NewRange, NewMin;
+            //float NewValue;
+            NewMin = 750; // Min laser power for raster engraving, still needs to be included into the M649 command
+            //OldRange = (255 - 0);
+            //NewRange = (laser.rasterlaserpower - NewMin); //7% power on my unit outputs hardly any noticable burn at F3000 on paper, so adjust the raster contrast based off 7 being the lower. 7 still produces burns at slower feed rates, but getting less power than this isn't typically needed at slow feed rates.
+            //NewValue = (float)(((((float)laser.raster_data[i] - 0) * NewRange) / OldRange) + 70);
+            //NewValue = ((((laser.raster_data[i] - 0) * NewRange) / OldRange) + NewMin);
+            //If less than 7%, turn off the laser tube.
+            //if(NewValue == 280) 
+            //	NewValue = 0;
+            int NewValue = laser.raster_data[i];
+            NewValue = map(NewValue, 0 ,255, NewMin, laser.rasterlaserpower); // Changed by Downunder35m as the original mapping resulted in a loss of CPU power due to the float calculations and the input range was set to 260 instead of 255 as otherwise total black areas would not come out properly.
+            if(NewValue <= NewMin)
+            NewValue = 0;
+            
+            block->laser_raster_data[i] = NewValue; 
         }
     } else {
         block->steps_l = 0;
