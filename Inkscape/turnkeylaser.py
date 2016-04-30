@@ -468,6 +468,7 @@ class Gcode_tools(inkex.Effect):
         self.OptionParser.add_option("",   "--biarc-tolerance",            action="store", type="float",         dest="biarc_tolerance", default="1",        help="Tolerance used when calculating biarc interpolation.")                
         self.OptionParser.add_option("",   "--biarc-max-split-depth",    action="store", type="int",         dest="biarc_max_split_depth", default="4",        help="Defines maximum depth of splitting while approximating using biarcs.")                
 
+        self.OptionParser.add_option("", "--exportDPI", action="store", type="int", dest="exportDPI", default="254", help="DPI of bitmaps") 
         self.OptionParser.add_option("",   "--unit",                    action="store", type="string",         dest="unit", default="G21 (All units in mm)\n",    help="Units")
         self.OptionParser.add_option("",   "--function",                action="store", type="string",         dest="function", default="Curve",                help="What to do: Curve|Area|Area inkscape")
         self.OptionParser.add_option("",   "--tab",                        action="store", type="string",         dest="tab", default="",                            help="Means nothing right now. Notebooks Tab.")
@@ -651,8 +652,8 @@ class Gcode_tools(inkex.Effect):
         #So R = 1 / (270 / 25.4) 
         #     = 0.09406
         gcode += '\n\n;Beginning of Raster Image '+str(curve['id'])+' pixel size: '+str(curve['width'])+'x'+str(curve['height'])+'\n'
-        gcode += 'M649 S'+str(laserPower)+' B2 D0 R0.05\n'
-         
+        #gcode += 'M649 S'+str(laserPower)+' B2 D0 R0.1\n'
+        gcode += 'M649 S'+str(laserPower)+' B2 D0 R' + str(25.4/self.options.exportDPI)+ '\n'
         #Do not remove these two lines, they're important. Will not raster correctly if feedrate is not set prior.
         #Move fast to point, cut at correct speed.
         if(cutFeed < self.options.Mfeed):
@@ -1000,8 +1001,7 @@ class Gcode_tools(inkex.Effect):
                     tmp = self.getTmpPath() #OS tmp directory
                     bgcol = "#ffffff" #White
                     curfile = curfile = self.args[-1] #The current inkscape project we're exporting from.
-                    command="inkscape --export-dpi 508 -i %s --export-id-only -e \"%stmpinkscapeexport.png\" -b \"%s\" %s" % (node.get("id"),tmp,bgcol,curfile) 
-            
+                    command="inkscape --export-dpi " + str(self.options.exportDPI) + " -i %s --export-id-only -e \"%stmpinkscapeexport.png\" -b \"%s\" %s" % (node.get("id"),tmp,bgcol,curfile)
                     p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     return_code = p.wait()
                     f = p.stdout

@@ -74,6 +74,7 @@ For the latest revision please visit https://github.com/TurnkeyTyranny/laser-gco
 
             <param name="Xscale" type="float" precision="4" min="-1000" max="1000" _gui-text="Scale along X axis:">1</param>
             <param name="Yscale" type="float" precision="4" min="-1000" max="1000" _gui-text="Scale along Y axis:">1</param>
+            <param name="exportDPI" type="int" min="0" max="1016" _gui-text="Default DPI">254</param>
             <param name="double_sided_cutting" type="boolean" _gui-text="Cut both sides of material?">false</param>
             <param name="draw-curves" type="boolean" _gui-text="Draw curves in inkscape layer">true</param>
             
