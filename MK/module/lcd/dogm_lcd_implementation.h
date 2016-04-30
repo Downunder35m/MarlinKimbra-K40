@@ -330,14 +330,14 @@ static void lcd_implementation_status_screen() {
     #endif
     lcd_setFont(FONT_STATUSMENU);
     u8g.setColorIndex(1);
-    u8g.setPrintPos(3,6);
+    u8g.setPrintPos(4,7);
     if (current_block->laser_status == LASER_ON) {
       u8g.drawBitmapP(5,14, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
       u8g.print(itostr3(current_block->laser_intensity));
-      lcd_printPGM(PSTR("%"));
+      lcd_printPGM(PSTR(" Powerlevel"));
     } else {
       u8g.drawBitmapP(5,14, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
-      lcd_printPGM(PSTR("---%"));
+      lcd_printPGM(PSTR("---- Powerlevel"));
     }
 
   #else
